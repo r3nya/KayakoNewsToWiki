@@ -1,7 +1,7 @@
 require 'kayako_client'
 require 'psych'
 
-configFileName = 'D:\Documents\RubyMine\KayakoNewsToWiki\config.yml'
+configFileName = 'config.yml'
 
 configFile = begin
   Psych.load_file(configFileName)
