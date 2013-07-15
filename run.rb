@@ -29,7 +29,8 @@ end
 stream = Psych::Stream.new(File.open(configFileName, 'w'))
 stream.start
 stream.push({:LastProcessedNewsItem => configFile[:LastProcessedNewsItem],
-             :LastProcessingTime => DateTime.now(), :URL => configFile[:URL],
+             :LastProcessingTime => DateTime.now(),
+             :URL => configFile[:URL],
              :KEY => configFile[:KEY],
              :SECRET => configFile[:SECRET]})
 stream.finish
