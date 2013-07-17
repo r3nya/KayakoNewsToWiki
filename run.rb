@@ -18,18 +18,18 @@ end
 
 news = KayakoClient::NewsItem.all()
 
-if news.count > 0
-  news.each do |news|
-    puts "#{news.id}. #{news.subject} :: #{news.contents}"
+news.each_index do |i|
+  if news[i].date_line < configFile[:LastProcessingTime]
+    puts "Already processed #{news[i].subject}."
+    next
+  else
+    puts "Processeing #{news[i].subject}."
   end
-else
-    puts "Notes missing."
 end
 
 stream = Psych::Stream.new(File.open(configFileName, 'w'))
 stream.start
-stream.push({:LastProcessedNewsItem => configFile[:LastProcessedNewsItem],
-             :LastProcessingTime => DateTime.now(),
+stream.push({:LastProcessingTime => Time.now,
              :URL => configFile[:URL],
              :KEY => configFile[:KEY],
              :SECRET => configFile[:SECRET]})
